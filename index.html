@@ -132,9 +132,18 @@
   .band-track{display:inline-flex;white-space:nowrap;animation:marquee 60s linear infinite;padding:12px 0;line-height:1.42}
   .band-track span{padding:0 34px}
   @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(33.333%)}}
+
+  /* ===== statement: kinetic headline (scroll-lit words) ===== */
+  .statement{padding:120px 24px;max-width:1150px;text-align:center}
+  .statement .line{font-family:'Katibeh',serif;font-size:clamp(44px,7.5vw,92px);line-height:1.45;color:var(--gold-pale)}
+  html.js .statement .w{opacity:.13;transition:opacity .5s ease}
+  html.js .statement .w.lit{opacity:1}
+
+  @media(max-width:640px){.statement{padding:84px 20px}}
   @media (prefers-reduced-motion:reduce){
     html.js .reveal{opacity:1;transform:none;transition:none}
     .hero-content>*,.hero-photo,.band-track{animation:none}
+    html.js .statement .w{opacity:1}
     .band-track{white-space:normal;padding:16px 12px}
   }
 </style>
@@ -180,6 +189,11 @@
   </div>
 </section>
 
+<section class="statement" id="statement">
+  <div class="line" data-kinetic>كن أنت، فالأصل لا يُقلَّد</div>
+  <div class="line" data-kinetic>نصنع المرئي ليبقى أثره</div>
+</section>
+
 <section id="journal">
   <div class="sec-kicker reveal">خواطر وشروحات</div>
   <h2 class="gold-text reveal" data-d="80">مقالات</h2>
@@ -216,6 +230,25 @@
 document.documentElement.classList.add('js');
 var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
 document.querySelectorAll('.reveal').forEach(function(el){el.style.transitionDelay=(el.getAttribute('data-d')||0)+'ms';io.observe(el);});
+
+/* kinetic statement: words light up one by one with scroll */
+var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.querySelectorAll('[data-kinetic]').forEach(function(line){
+  var words=line.textContent.trim().split(/\s+/);
+  line.innerHTML=words.map(function(w){return '<span class="w">'+w+'</span>';}).join(' ');
+});
+function kinetic(){
+  var ws=document.querySelectorAll('.statement .w');
+  if(RM){ws.forEach(function(w){w.classList.add('lit');});return;}
+  document.querySelectorAll('.statement').forEach(function(sec){
+    var r=sec.getBoundingClientRect();
+    var p=(innerHeight-r.top)/(innerHeight*0.9);
+    p=Math.max(0,Math.min(1,p));
+    var words=sec.querySelectorAll('.w'),n=words.length;
+    words.forEach(function(w,i){w.classList.toggle('lit',p*(n+1)>i+1);});
+  });
+}
+addEventListener('scroll',kinetic,{passive:true});addEventListener('resize',kinetic);kinetic();
 </script>
 </body>
 </html>
