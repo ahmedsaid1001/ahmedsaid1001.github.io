@@ -69,7 +69,7 @@
 
   /* ===== gold band (static replacement for Le Reve marquee) ===== */
   .band{background:linear-gradient(90deg,#E6E0CE,#F5F1E4 50%,#E6E0CE);
-    color:var(--navy-dark);text-align:center;padding:16px 12px;font-family:'Katibeh',serif;font-size:26px}
+    color:var(--navy-dark);text-align:center;padding:16px 12px;font-family:'Katibeh',serif;font-size:34px}
 
   /* ===== sections ===== */
   section{padding:72px 24px;max-width:1060px;margin:0 auto;scroll-margin-top:12px}
@@ -108,12 +108,34 @@
     .grid{grid-template-columns:1fr}
     .journal-grid{grid-template-columns:1fr}
     h2{font-size:40px}
-    .band{font-size:17px;padding:12px 10px;line-height:1.5}
+    .band{font-size:22px}.band-track{line-height:1.5}
     .hero{grid-template-columns:1fr;padding:40px 24px 64px;text-align:center;gap:6px}
     .hero-photo img{height:54vh;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 58%,rgba(0,0,0,.5) 80%,transparent 98%),linear-gradient(to left,transparent 0%,#000 18%,#000 82%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 58%,rgba(0,0,0,.5) 80%,transparent 98%),linear-gradient(to left,transparent 0%,#000 18%,#000 82%,transparent 100%);mask-composite:intersect}
     h1{font-size:min(12vw,58px)}
     .tag{font-size:20px}
     .cta{justify-content:center}
+  }
+
+  /* ===== motion: hero entrance + scroll reveal + band marquee ===== */
+  @keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes photoIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+  .hero-content>*{animation:riseIn .8s cubic-bezier(.22,.61,.36,1) both}
+  .hero-content>*:nth-child(1){animation-delay:.05s}
+  .hero-content>*:nth-child(2){animation-delay:.15s}
+  .hero-content>*:nth-child(3){animation-delay:.3s}
+  .hero-content>*:nth-child(4){animation-delay:.42s}
+  .hero-content>*:nth-child(5){animation-delay:.55s}
+  .hero-photo{animation:photoIn 1.1s ease both}
+  html.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
+  html.js .reveal.in{opacity:1;transform:none}
+  .band{overflow:hidden;padding:0}
+  .band-track{display:inline-flex;white-space:nowrap;animation:marquee 60s linear infinite;padding:12px 0;line-height:1.42}
+  .band-track span{padding:0 34px}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(33.333%)}}
+  @media (prefers-reduced-motion:reduce){
+    html.js .reveal{opacity:1;transform:none;transition:none}
+    .hero-content>*,.hero-photo,.band-track{animation:none}
+    .band-track{white-space:normal;padding:16px 12px}
   }
 </style>
 </head>
@@ -144,51 +166,56 @@
   </div>
 </header>
 
-<div class="band">المحتوى الهادف يستاهل شكل يليق بيه ✦ شغل حلال بدون موسيقى وبدون مواد مقرصنة</div>
+<div class="band"><div class="band-track"><span>كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦</span><span>كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦</span><span>كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦ كن أنت، فالأصل لا يُقلَّد ✦ نصنع المرئي ليبقى أثره ✦</span></div></div>
 
 <section id="works">
-  <div class="sec-kicker">مختارات من الشغل</div>
-  <h2 class="gold-text">الأعمال</h2>
-  <p class="sec-sub">أحدث المشاريع، من إعلانات الذكاء الاصطناعي إلى تصميمات السوشيال.</p>
+  <div class="sec-kicker reveal">مختارات من الشغل</div>
+  <h2 class="gold-text reveal" data-d="80">الأعمال</h2>
+  <p class="sec-sub reveal" data-d="160">أحدث المشاريع، من إعلانات الذكاء الاصطناعي إلى تصميمات السوشيال.</p>
   <div class="grid">
-    <a class="card" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">فيديو — إعلان</div><div class="body"><div><h3>إعلانات الذكاء الاصطناعي</h3><div class="cat">فيديو · موشن</div></div><div class="year">2026</div></div></a>
-    <a class="card" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">فيديو — ريل</div><div class="body"><div><h3>ريلز قصيرة</h3><div class="cat">فيديو · سوشيال</div></div><div class="year">2026</div></div></a>
-    <a class="card" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">فيديو — كرتون</div><div class="body"><div><h3>أعمال كرتون</h3><div class="cat">رسوم · أطفال</div></div><div class="year">2025</div></div></a>
-    <a class="card" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">تصميم — بوستر</div><div class="body"><div><h3>تصميمات سوشيال</h3><div class="cat">تصميم · هوية</div></div><div class="year">2025</div></div></a>
+    <a class="card reveal" data-d="0" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">فيديو — إعلان</div><div class="body"><div><h3>إعلانات الذكاء الاصطناعي</h3><div class="cat">فيديو · موشن</div></div><div class="year">2026</div></div></a>
+    <a class="card reveal" data-d="90" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">فيديو — ريل</div><div class="body"><div><h3>ريلز قصيرة</h3><div class="cat">فيديو · سوشيال</div></div><div class="year">2026</div></div></a>
+    <a class="card reveal" data-d="180" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">فيديو — كرتون</div><div class="body"><div><h3>أعمال كرتون</h3><div class="cat">رسوم · أطفال</div></div><div class="year">2025</div></div></a>
+    <a class="card reveal" data-d="270" href="https://ahmedsaid1001p.my.canva.site/" target="_blank" rel="noopener"><div class="thumb">تصميم — بوستر</div><div class="body"><div><h3>تصميمات سوشيال</h3><div class="cat">تصميم · هوية</div></div><div class="year">2025</div></div></a>
   </div>
 </section>
 
 <section id="journal">
-  <div class="sec-kicker">خواطر وشروحات</div>
-  <h2 class="gold-text">مقالات</h2>
-  <p class="sec-sub">مقالات قصيرة عن صناعة المحتوى والهوية البصرية.</p>
+  <div class="sec-kicker reveal">خواطر وشروحات</div>
+  <h2 class="gold-text reveal" data-d="80">مقالات</h2>
+  <p class="sec-sub reveal" data-d="160">مقالات قصيرة عن صناعة المحتوى والهوية البصرية.</p>
   <div class="journal-grid">
-    <div class="jcard"><div class="jdate">قريبًا</div><h3>عنوان أول مقال</h3><p>ملخص قصير للمقال يظهر هنا، سطرين بالكتير، ويكمل بالضغط على المقال.</p></div>
-    <div class="jcard"><div class="jdate">قريبًا</div><h3>عنوان ثاني مقال</h3><p>ملخص قصير للمقال يظهر هنا، سطرين بالكتير، ويكمل بالضغط على المقال.</p></div>
-    <div class="jcard"><div class="jdate">قريبًا</div><h3>عنوان ثالث مقال</h3><p>ملخص قصير للمقال يظهر هنا، سطرين بالكتير، ويكمل بالضغط على المقال.</p></div>
+    <div class="jcard reveal" data-d="0"><div class="jdate">قريبًا</div><h3>عنوان أول مقال</h3><p>ملخص قصير للمقال يظهر هنا، سطرين بالكتير، ويكمل بالضغط على المقال.</p></div>
+    <div class="jcard reveal" data-d="100"><div class="jdate">قريبًا</div><h3>عنوان ثاني مقال</h3><p>ملخص قصير للمقال يظهر هنا، سطرين بالكتير، ويكمل بالضغط على المقال.</p></div>
+    <div class="jcard reveal" data-d="200"><div class="jdate">قريبًا</div><h3>عنوان ثالث مقال</h3><p>ملخص قصير للمقال يظهر هنا، سطرين بالكتير، ويكمل بالضغط على المقال.</p></div>
   </div>
 </section>
 
 <section class="about texture" id="about">
-  <div class="about-in">
-    <div class="sec-kicker">نبذة</div>
-    <h2 class="gold-text">من أنا</h2>
+  <div class="about-in reveal">
+    <div class="sec-kicker reveal">نبذة</div>
+    <h2 class="gold-text reveal" data-d="80">من أنا</h2>
     <p>أنا <b>أحمد سعيد حسين</b>، صانع محتوى مرئي. بشتغل على فيديوهات وإعلانات وتصميمات بهوية عربية واضحة، وبخدم صنّاع المحتوى الهادف والمشاريع التعليمية. شغلي كله بيلتزم بضوابط المحتوى الحلال: <b>بدون موسيقى وبدون مواد مقرصنة</b>.</p>
   </div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="sec-kicker">خلّينا نشتغل مع بعض</div>
-  <h2 class="gold-text">تواصل</h2>
-  <p class="sec-sub">ابعتلي فكرة مشروعك وبرد عليك في أقرب وقت.</p>
+  <div class="sec-kicker reveal">خلّينا نشتغل مع بعض</div>
+  <h2 class="gold-text reveal" data-d="80">تواصل</h2>
+  <p class="sec-sub reveal" data-d="160">ابعتلي فكرة مشروعك وبرد عليك في أقرب وقت.</p>
   <div class="cta">
-    <a class="btn btn-gold" href="https://t.me/A_1001_S" target="_blank" rel="noopener">تليجرام</a>
-    <a class="btn btn-line" href="mailto:ahmedsaid152001@gmail.com">البريد الإلكتروني</a>
-    <a class="btn btn-line" href="https://www.facebook.com/ahmed.saeed.195391" target="_blank" rel="noopener">فيسبوك</a>
+    <a class="btn btn-gold" href="https://www.linkedin.com/in/ahmed-s-hussein-656b5a217" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn btn-line" href="mailto:ahmedsaid152001@gmail.com">Email</a>
+    <a class="btn btn-line" href="https://www.facebook.com/ahmed.saeed.195391" target="_blank" rel="noopener">Facebook</a>
   </div>
 </section>
 
 <footer>أحمد سعيد حسين <span>✦</span> صانع محتوى مرئي — 2026</footer>
 
+<script>
+document.documentElement.classList.add('js');
+var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(function(el){el.style.transitionDelay=(el.getAttribute('data-d')||0)+'ms';io.observe(el);});
+</script>
 </body>
 </html>
